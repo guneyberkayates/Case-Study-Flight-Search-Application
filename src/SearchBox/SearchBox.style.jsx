@@ -8,14 +8,16 @@ const styles = {
     position:'absolute',
     left:200,
     top:100,
-    right:200
+    right:200,
+    
 
   },
+  
   layout: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
+  
     
   },
   departure: {

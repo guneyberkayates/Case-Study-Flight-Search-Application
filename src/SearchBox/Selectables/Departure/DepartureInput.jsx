@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import styles from './Departure.style';
 function Departure(props) {
   const { departureLocation, onDepartureChange } = props;
 
@@ -9,12 +9,12 @@ function Departure(props) {
   };
 
   return (
-    <div>
-      <label htmlFor="departure">Gidiş:</label>
+    <div style={styles.layout}>
       <input
-        id="departure"
+        style={styles.input}
         value={departureLocation}
         onChange={departureChanged}
+        placeholder={"Nereden"}
       />
     </div>
   );

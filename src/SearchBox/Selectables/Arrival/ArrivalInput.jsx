@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import styles from './Arrival.style';
 function Arrival(props) {
   const { arrivalLocation, onArrivalChange } = props;
 
@@ -9,12 +9,12 @@ function Arrival(props) {
   };
 
   return (
-    <div>
-      <label htmlFor="arrival">Dönüş:</label>
+    <div style={styles.layout}>   
       <input
-        id="arrival"
+        style={styles.input}
         value={arrivalLocation}
         onChange={arrivalChanged}
+        placeholder={"Nereye"}
       />
     </div>
   );

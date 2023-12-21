@@ -1,37 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DepartureDate from './Selectables/Departure/DepartureDate';
-import Departure from './Selectables/Departure/Departure';
-import ArrivalDate from './Selectables/Arrival/ArrivalDate';
-import Arrival from './Selectables/Arrival/Arrival';
+import Departure from './Selectables/Departure/DepartureInput';
+import ArrivalDate from './Selectables/Arrival/ReturnDate';
+import Arrival from './Selectables/Arrival/ArrivalInput';
+import TripType from './Selectables/TripType/TripType';
 import styles from './SearchBox.style';
 
-function SearchBox({ onSearch }) {
-  const [isRoundTrip, setIsRoundTrip] = useState(true);
+function SearchBox({ onSearchDeparture,onSearchArrival }) {
+
+
+  let lock = true
+  const [tripType, setTripType] = useState('roundTrip');
   const [arrivalLocation, setArrivalLocation] = useState('');
   const [departureLocation, setDepartureLocation] = useState('');
-  const [flights, setFlights] = useState([]);
+  
+  if (tripType === 'roundTrip'){
+     lock = false
+  }
+  
   useEffect(() => {
-    
-    if (arrivalLocation.trim() !== '' && departureLocation.trim() !=='') {
-      onSearch(departureLocation, arrivalLocation);
-      
-      fetch(`http://127.0.0.1:5000/api/flights?departure_location=${departureLocation}&arrival_location=${arrivalLocation}&start_date=2023-01-01&end_date=2023-01-10`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('API Response:', data);
-         
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-         
-        });
+    if (arrivalLocation.trim() !== '') {
+      onSearchDeparture(arrivalLocation);
     }
-  }, [arrivalLocation, departureLocation]); 
+  }, [arrivalLocation]);
 
-  const switchRound = () => {
-    setIsRoundTrip((prevIsRoundTrip) => !prevIsRoundTrip);
-  };
+  useEffect(() => {
+    if (departureLocation.trim() !== '') {
+      onSearchArrival(departureLocation);
+    }
+  }, [departureLocation]);
+    
+
+
 
   const departureChanged = (event) => {
     setDepartureLocation(event.target.value);
@@ -41,25 +42,33 @@ function SearchBox({ onSearch }) {
     setArrivalLocation(event.target.value);
   };
 
+  const tripTypeChanged = (event) => {
+    setTripType(event.target.value);
+  };
+
+ 
+
   return (
     <div style={styles.searchbox}>
-      <button onClick={switchRound}>
-        {isRoundTrip ? 'Gidiş-Dönüş' : 'Tek Yön'}
-      </button>
+      <TripType tripType={tripType} onTripTypeChange={tripTypeChanged} />
+      
       <div style={styles.layout}>
       <Departure
           style={styles.departure}
           departureLocation={departureLocation}
           onDepartureChange={departureChanged}
         />
-        <DepartureDate style={styles.departureDate} />
         <Arrival
           style={styles.arrival}
           arrivalLocation={arrivalLocation}
           onArrivalChange={arrivalChanged}
         />
-        {isRoundTrip && <ArrivalDate styles={styles.arrivalDate} />}
+        <DepartureDate 
+          style={styles.departureDate} 
+        />
+        <ArrivalDate styles={styles.arrivalDate} lock={lock}/>
       </div>
+
     </div>
   );
 }
