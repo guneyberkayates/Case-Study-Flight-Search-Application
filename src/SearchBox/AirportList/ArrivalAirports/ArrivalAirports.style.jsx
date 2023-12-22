@@ -1,7 +1,7 @@
 const styles = {
     airportList: {
       position: 'absolute',
-      left: 160,
+      left: 380,
       top: 150,
       right: 200,
      

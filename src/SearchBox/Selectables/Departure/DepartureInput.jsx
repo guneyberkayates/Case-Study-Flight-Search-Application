@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './Departure.style';
-function Departure(props) {
-  const { departureLocation, onDepartureChange } = props;
+function Departure({ departureLocation, onDepartureChange }) {
 
   const departureChanged = (event) => {
     onDepartureChange(event);
@@ -20,9 +18,6 @@ function Departure(props) {
   );
 }
 
-Departure.propTypes = {
-  departureLocation: PropTypes.string.isRequired,
-  onDepartureChange: PropTypes.func.isRequired,
-};
+
 
 export default Departure;

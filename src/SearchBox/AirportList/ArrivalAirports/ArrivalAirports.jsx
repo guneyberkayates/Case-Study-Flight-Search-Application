@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import PropTypes from 'prop-types';
-import styles from './AirportList.style';
+import styles from './ArrivalAirports.style';
 
-function AirportList({ airports }) {
+function ArrivalAirports({ airports }) {
 
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -29,7 +29,7 @@ function AirportList({ airports }) {
   );
 }
 
-AirportList.propTypes = {
+ArrivalAirports.propTypes = {
     airports: PropTypes.arrayOf(
     PropTypes.shape({
         name: PropTypes.string, 
@@ -39,4 +39,4 @@ AirportList.propTypes = {
   ),
 };
 
-export default AirportList;
+export default ArrivalAirports;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import DepartureDate from './Selectables/Departure/DepartureDate';
 import Departure from './Selectables/Departure/DepartureInput';
 import ArrivalDate from './Selectables/Arrival/ReturnDate';
@@ -7,7 +6,7 @@ import Arrival from './Selectables/Arrival/ArrivalInput';
 import TripType from './Selectables/TripType/TripType';
 import styles from './SearchBox.style';
 
-function SearchBox({ onSearchDeparture,onSearchArrival }) {
+function SearchBox({ onSearchDeparture,onSearchArrival,onEmptyDeparture,onEmptyArrival }) {
 
 
   let lock = true
@@ -15,19 +14,26 @@ function SearchBox({ onSearchDeparture,onSearchArrival }) {
   const [arrivalLocation, setArrivalLocation] = useState('');
   const [departureLocation, setDepartureLocation] = useState('');
   
+  
   if (tripType === 'roundTrip'){
      lock = false
   }
   
   useEffect(() => {
     if (arrivalLocation.trim() !== '') {
-      onSearchDeparture(arrivalLocation);
+      onSearchArrival(arrivalLocation);
+    }
+    else{
+      onEmptyArrival()
     }
   }, [arrivalLocation]);
 
   useEffect(() => {
     if (departureLocation.trim() !== '') {
-      onSearchArrival(departureLocation);
+      onSearchDeparture(departureLocation);
+    }
+    else{
+      onEmptyDeparture()
     }
   }, [departureLocation]);
     
@@ -51,7 +57,7 @@ function SearchBox({ onSearchDeparture,onSearchArrival }) {
   return (
     <div style={styles.searchbox}>
       <TripType tripType={tripType} onTripTypeChange={tripTypeChanged} />
-      
+
       <div style={styles.layout}>
       <Departure
           style={styles.departure}
@@ -73,6 +79,5 @@ function SearchBox({ onSearchDeparture,onSearchArrival }) {
   );
 }
 
-SearchBox.propTypes = {};
 
 export default SearchBox;
