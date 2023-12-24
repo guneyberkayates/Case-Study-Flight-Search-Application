@@ -1,25 +1,21 @@
-import React from "react";
-
 const styles = {
   searchbox: {
     width: 1000,
     height: 100,
-   
+    border:10,
+    borderColor:"red",
     position:'absolute',
     left:200,
     top:100,
     right:200,
-    
-
   },
   
   layout: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-  
-    
   },
+
   departure: {
     display: "flex",
     margin: 5,

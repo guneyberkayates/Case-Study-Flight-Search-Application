@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import DepartureDate from './Selectables/Departure/DepartureDate';
-import Departure from './Selectables/Departure/DepartureInput';
-import ArrivalDate from './Selectables/Arrival/ReturnDate';
-import Arrival from './Selectables/Arrival/ArrivalInput';
+import Departure from './Selectables/Departure/Departure';
+import ReturnDate from './Selectables/Arrival/ReturnDate';
+import Arrival from './Selectables/Arrival/Arrival';
 import TripType from './Selectables/TripType/TripType';
+import SearchFlightsButton from './Buttons/SearchFlightsButton';
 import styles from './SearchBox.style';
 
-function SearchBox({ onSearchDeparture,onSearchArrival,onEmptyDeparture,onEmptyArrival }) {
 
-
+function SearchBox({ onSearchDeparture,
+                     onSearchArrival,
+                     onEmptyDeparture,
+                     onEmptyArrival,
+                     selectedDeparture,
+                     selectedArrival 
+                    }) 
+                    {
   let lock = true
   const [tripType, setTripType] = useState('roundTrip');
   const [arrivalLocation, setArrivalLocation] = useState('');
@@ -38,8 +45,6 @@ function SearchBox({ onSearchDeparture,onSearchArrival,onEmptyDeparture,onEmptyA
   }, [departureLocation]);
     
 
-
-
   const departureChanged = (event) => {
     setDepartureLocation(event.target.value);
   };
@@ -52,8 +57,6 @@ function SearchBox({ onSearchDeparture,onSearchArrival,onEmptyDeparture,onEmptyA
     setTripType(event.target.value);
   };
 
- 
-
   return (
     <div style={styles.searchbox}>
       <TripType tripType={tripType} onTripTypeChange={tripTypeChanged} />
@@ -63,16 +66,21 @@ function SearchBox({ onSearchDeparture,onSearchArrival,onEmptyDeparture,onEmptyA
           style={styles.departure}
           departureLocation={departureLocation}
           onDepartureChange={departureChanged}
+          selectedAirport={selectedDeparture}
         />
         <Arrival
           style={styles.arrival}
           arrivalLocation={arrivalLocation}
           onArrivalChange={arrivalChanged}
+          selectedAirport={selectedArrival}
         />
         <DepartureDate 
           style={styles.departureDate} 
         />
-        <ArrivalDate styles={styles.arrivalDate} lock={lock}/>
+        <ReturnDate styles={styles.arrivalDate} lock={lock}/>
+
+        <SearchFlightsButton/>
+
       </div>
 
     </div>

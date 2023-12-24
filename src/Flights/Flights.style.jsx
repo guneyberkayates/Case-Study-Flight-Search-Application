@@ -5,8 +5,10 @@ const styles = {
         width: 1000,
         position:'absolute',
         left:200,
-        top:200,
-        right:200
+        top:500,
+        right:200,
+        backgroundColor:"green"
+        
     
       },
       layout: {
