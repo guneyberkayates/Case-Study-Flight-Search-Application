@@ -74,9 +74,9 @@ function SearchFlight() {
       let response;
       
       if (tripType !== "oneWay") {
-        response = await fetch(`http://127.0.0.1:5000/api/roundtripflights?departure_location=${departureAirport}&arrival_location=${arrivalAirport}&start_date=${departureDate}&end_date=${returnDate}`);
+        response = await fetch(`http://34.125.26.179/api/roundtripflights?departure_location=${departureAirport}&arrival_location=${arrivalAirport}&start_date=${departureDate}&end_date=${returnDate}`);
       } else {
-        response = await fetch(`http://127.0.0.1:5000/api/flights?departure_location=${departureAirport}&arrival_location=${arrivalAirport}&start_date=${departureDate}`);
+        response = await fetch(`http://34.125.26.179/api/flights?departure_location=${departureAirport}&arrival_location=${arrivalAirport}&start_date=${departureDate}`);
       }
   
       if (!response.ok) {
@@ -123,10 +123,10 @@ function SearchFlight() {
    
     {showFlights && (
         <div> 
-          <button onClick={() => sortFlights('departureTime')}>Sort by Departure Time</button>
-          <button onClick={() => sortFlights('arrivalTime')}>Sort by Arrival Time</button>
-          <button onClick={() => sortFlights('flightDuration')}>Sort by Flight Duration</button>
-          <button onClick={() => sortFlights('price')}>Sort by Price</button>
+          <button onClick={() => sortFlights('departureTime')}>Kalkış saatine göre </button>
+          <button onClick={() => sortFlights('arrivalTime')}>Varış saatine göre </button>
+          <button onClick={() => sortFlights('flightDuration')}>Uçuş süresine göre </button>
+          <button onClick={() => sortFlights('price')}>Fiyata göre</button>
         </div>
       )}
     {loading && <Loading/>}

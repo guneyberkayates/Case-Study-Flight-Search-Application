@@ -28,7 +28,7 @@ function SearchAirport() {
     try {
       setShowAirportsDep(true);
       setShowAirportsArr(true);
-      const response = await fetch(`http://127.0.0.1:5000/api/airports?query=${departureLocation}`);
+      const response = await fetch(`http://34.125.26.179/api/airports?query=${departureLocation}`);
       const data = await response.json();
       console.log('API Response:', data);
       if (data.airports.length === 0) {
@@ -47,7 +47,7 @@ function SearchAirport() {
     try {
       setShowAirportsDep(true);
       setShowAirportsArr(true);
-      const response = await fetch(`http://127.0.0.1:5000/api/airports?query=${arrivalLocation}`);
+      const response = await fetch(`http://34.125.26.179/api/airports?query=${arrivalLocation}`);
       const data = await response.json();
       console.log('API Response:', data);
       if (data.airports.length === 0) {
