@@ -4,7 +4,6 @@ import Departure from './Selectables/Departure/Departure';
 import ReturnDate from './Selectables/Arrival/ReturnDate';
 import Arrival from './Selectables/Arrival/Arrival';
 import TripType from './Selectables/TripType/TripType';
-import SearchFlightsButton from './Buttons/SearchFlightsButton';
 import styles from './SearchBox.style';
 
 
@@ -79,7 +78,6 @@ function SearchBox({ onSearchDeparture,
         />
         <ReturnDate styles={styles.arrivalDate} lock={lock}/>
 
-        <SearchFlightsButton/>
 
       </div>
 

@@ -6,10 +6,13 @@ import { useDispatch } from 'react-redux';
 function Arrival(props) {
   const { arrivalLocation, onArrivalChange, selectedAirport } = props;
   const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedAirport) {
+      setInputValue(selectedAirport)
       dispatch({
         type: 'ArrivalAirport',
         payload: selectedAirport,
@@ -24,6 +27,7 @@ function Arrival(props) {
   const focus = () => {
     if (selectedAirport) {
       setIsFocused(true);
+      setInputValue('')
       onArrivalChange({ target: { value: '' } }); 
     }
   };
@@ -36,7 +40,7 @@ function Arrival(props) {
     <div style={styles.layout}>
       <input
         style={styles.input}
-        value={isFocused ? '' : selectedAirport || arrivalLocation}
+        value={inputValue || arrivalLocation}
         onChange={arrivalChanged}
         onFocus={focus}
         onBlur={blur}

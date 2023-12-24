@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './ReturnDate.style.';
 
-function ReturnDate(props) {
+function ReturnDate({lock}) {
   const dispatch = useDispatch(); 
 
   const handleDateChange = (event) => {
@@ -20,6 +20,7 @@ function ReturnDate(props) {
         id="date"
         style={styles.input}
         onChange={handleDateChange}
+        disabled={lock}
       />
     </div>
   );

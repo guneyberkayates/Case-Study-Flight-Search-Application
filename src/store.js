@@ -35,6 +35,14 @@ const rootReducer = (state = initialState, action) => {
           arrivalAirport: action.payload,
         },
       };
+    case 'TripType':
+        return {
+          ...state,
+          variables: {
+            ...state.variables,
+            tripType: action.payload,
+          },
+        };
     case 'ReturnDate':
       return {
         ...state,

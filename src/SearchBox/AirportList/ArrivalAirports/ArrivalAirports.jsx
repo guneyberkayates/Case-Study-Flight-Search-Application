@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ArrivalAirports.style';
 
-function ArrivalAirports({ airports, onSelectArrival }) {
+function ArrivalAirports({ airports, onSelectArrival,errorOnArrival }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isOpen, setIsOpen] = useState(true); 
 
@@ -18,6 +18,8 @@ function ArrivalAirports({ airports, onSelectArrival }) {
 
   return (
     <div style={{ ...styles.airportList, display: isOpen ? 'block' : 'none' }}>
+            {errorOnArrival ?( <ul style={styles.scrollableList}><div style={{ color: 'red' }}>Havaalanı bulunamadı</div></ul>):
+(
       <ul style={styles.scrollableList}>
         {airports.map((airport, index) => (
           <li key={index} onClick={() => selectItem(index, airport)}>
@@ -28,13 +30,15 @@ function ArrivalAirports({ airports, onSelectArrival }) {
               }}
             >
               <p style={styles.text}>
-                {airport.name} ({airport.code}) , {airport.city}
+                 {airport.name} {airport.code} , {airport.city}
               </p>
+
               <br />
             </div>
           </li>
         ))}
-      </ul>
+      </ul>)
+          }
     </div>
   );
 }
@@ -48,6 +52,7 @@ ArrivalAirports.propTypes = {
     })
   ),
   onSelectArrival: PropTypes.func.isRequired,
+  errorOnArrival: PropTypes.string,
 };
 
 export default ArrivalAirports;

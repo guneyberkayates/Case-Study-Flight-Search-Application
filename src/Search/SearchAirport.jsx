@@ -3,11 +3,15 @@ import ArrivalAirports from '../SearchBox/AirportList/ArrivalAirports/ArrivalAir
 import DepartureAirports from '../SearchBox/AirportList/DepartureAirports/DepartureAirports';
 import SearchBox from '../SearchBox/SearchBox';
 import styles from './SearchAirport.style';
+
 function SearchAirport() {
   const [airportsDeparture, setAirportsDeparture] = useState([]);
   const [airportsArrival, setAirportsArrival] = useState([]);
+  const [errorDeparture, setErrorDeparture] = useState(null);
+  const [errorArrival, setErrorArrival] = useState(null);
   const [empty, setEmpty] = useState([]);
-  const [showAirports, setShowAirports] = useState(true);
+  const [showAirportsDep, setShowAirportsDep] = useState(true);
+  const [showAirportsArr, setShowAirportsArr] = useState(true);
 
   const [selectedDeparture, setSelectedDeparture] = useState(null);
   const [selectedArrival, setSelectedArrival] = useState(null);
@@ -22,42 +26,58 @@ function SearchAirport() {
 
   const fetchAirportDeparture = async (departureLocation) => {
     try {
-      setShowAirports(true);
+      setShowAirportsDep(true);
+      setShowAirportsArr(true);
       const response = await fetch(`http://127.0.0.1:5000/api/airports?query=${departureLocation}`);
       const data = await response.json();
       console.log('API Response:', data);
-      setAirportsDeparture(data.airports);
+      if (data.airports.length === 0) {
+        setErrorDeparture('Aradığınız havaalanı bulunamadı');
+      } else {
+        setAirportsDeparture(data.airports);
+        setErrorDeparture(null);  
+      }
     } catch (error) {
+      setErrorDeparture('API ile ilgili bir hata oluştu');
       console.error('Error:', error);
     }
   };
 
   const fetchAirportArrival = async (arrivalLocation) => {
     try {
-      setShowAirports(true);
+      setShowAirportsDep(true);
+      setShowAirportsArr(true);
       const response = await fetch(`http://127.0.0.1:5000/api/airports?query=${arrivalLocation}`);
       const data = await response.json();
       console.log('API Response:', data);
-      setAirportsArrival(data.airports);
+      if (data.airports.length === 0) {
+        setErrorArrival('Aradığınız havaalanı bulunamadı');
+      } else {
+        setAirportsArrival(data.airports);
+        setErrorArrival(null); 
+      }
     } catch (error) {
+      setErrorArrival('API ile ilgili bir hata oluştu');
       console.error('Error:', error);
     }
   };
 
   const emptySearchDeparture = async () => {
     setAirportsDeparture(empty);
-    setShowAirports(false);
+    setShowAirportsDep(false);
   };
 
   const emptySearchArrival = async () => {
     setAirportsArrival(empty);
-    setShowAirports(false);
+    setShowAirportsArr(false);
   };
 
-  const closeAirportSelection = () => {
-    setShowAirports(false);
+  const closeAirportSelectionDep = () => {
+    setShowAirportsDep(false);
   };
-
+  const closeAirportSelectionArr = () => {
+    setShowAirportsArr(false);
+  };
   return (
     <div style={styles.searchAirport}>
       <SearchBox
@@ -69,12 +89,17 @@ function SearchAirport() {
         selectedArrival={selectedArrival}
       />
 
-      {showAirports && (
+      {showAirportsDep && (
         <>
-          <DepartureAirports airports={airportsDeparture} onSelectDeparture={selectDeparture} />
-          <ArrivalAirports airports={airportsArrival} onSelectArrival={selectArrival} onClose={closeAirportSelection} />
+          <DepartureAirports airports={airportsDeparture} onSelectDeparture={selectDeparture} onClose={closeAirportSelectionDep} errorOnDeparture={errorDeparture}/>
         </>
       )}
+       {showAirportsArr && (
+        <>
+          <ArrivalAirports airports={airportsArrival} onSelectArrival={selectArrival} onClose={closeAirportSelectionArr} errorOnArrival={errorArrival}/>
+        </>
+      )}
+
      
     </div>
   );

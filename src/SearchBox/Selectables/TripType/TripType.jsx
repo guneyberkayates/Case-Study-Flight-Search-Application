@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './TripType.style';
+import { useDispatch } from 'react-redux';
+
 function TripType({ tripType, onTripTypeChange }) {
+  const dispatch = useDispatch();
+
   const tripTypeChanged = (event) => {
     onTripTypeChange(event);
+   
+  
   };
+
+  useEffect(() => {
+    dispatch({
+      type: 'TripType',
+      payload: tripType,
+    });
+  
+  
+  }, [tripTypeChanged])
+  
 
   return (
     <div>
