@@ -74,9 +74,9 @@ function SearchFlight() {
       let response;
       
       if (tripType !== "oneWay") {
-        response = await fetch(`http://34.125.26.179/api/roundtripflights?departure_location=${departureAirport}&arrival_location=${arrivalAirport}&start_date=${departureDate}&end_date=${returnDate}`);
+        response = await fetch(`http://158.101.175.57/api/roundtripflights?departure_location=${departureAirport}&arrival_location=${arrivalAirport}&start_date=${departureDate}&end_date=${returnDate}`);
       } else {
-        response = await fetch(`http://34.125.26.179/api/flights?departure_location=${departureAirport}&arrival_location=${arrivalAirport}&start_date=${departureDate}`);
+        response = await fetch(`http://158.101.175.57/api/flights?departure_location=${departureAirport}&arrival_location=${arrivalAirport}&start_date=${departureDate}`);
       }
   
       if (!response.ok) {
