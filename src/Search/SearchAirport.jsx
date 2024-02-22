@@ -47,7 +47,7 @@ function SearchAirport() {
     try {
       setShowAirportsDep(true);
       setShowAirportsArr(true);
-      const response = await fetch(`http://158.101.175.5/api/airports?query=${arrivalLocation}`);
+      const response = await fetch(`http://158.101.175.57/api/airports?query=${arrivalLocation}`);
       const data = await response.json();
       console.log('API Response:', data);
       if (data.airports.length === 0) {
