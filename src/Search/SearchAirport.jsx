@@ -28,7 +28,7 @@ function SearchAirport() {
     try {
       setShowAirportsDep(true);
       setShowAirportsArr(true);
-      const response = await fetch(`http://158.101.175.57/api/airports?query=${departureLocation}`);
+      const response = await fetch(`https://finance.aichatgenius.co/api/airports?query=${departureLocation}`);
       const data = await response.json();
       console.log('API Response:', data);
       if (data.airports.length === 0) {
@@ -47,7 +47,7 @@ function SearchAirport() {
     try {
       setShowAirportsDep(true);
       setShowAirportsArr(true);
-      const response = await fetch(`http://158.101.175.57/api/airports?query=${arrivalLocation}`);
+      const response = await fetch(`https://finance.aichatgenius.co/api/airports?query=${arrivalLocation}`);
       const data = await response.json();
       console.log('API Response:', data);
       if (data.airports.length === 0) {
